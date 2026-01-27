@@ -4,14 +4,17 @@ import { viaggiatori } from "../assets/data";
 import { useState } from "react";
 
 export default function Dettagli() {
+
+
     const { id } = useParams();
     const [viaggio, setViaggio] = useState(viaggi[id - 1]);
-    const [people, setPeople] = useState(null)
+    const [search, setSearch] = useState("")
     const [btn, setBtn] = useState(false)
+   
     const navigate = useNavigate()
 
 
-    const takePeople = []
+    const takePeople = [];
 
     for (let i = 0; i < viaggiatori.length; i++) {
         const curPerson = viaggiatori[i];
@@ -21,7 +24,7 @@ export default function Dettagli() {
             takePeople.push(curPerson);
         }
     }
-
+   
 
 
 
@@ -43,13 +46,34 @@ export default function Dettagli() {
         setBtn(!btn);
     }
 
-    
+
     function goBack() {
         navigate(-1)
     }
 
+    const [filter, setFilter] = useState(takePeople)
+    
+    function updateForm(event) {
+        event.preventDefault()
+        console.log(takePeople);
+        
+        if(search !== "") {
+            
+            const filterdArray = takePeople.filter((element)=> element.nome === search ? element : "")
+            setFilter(filterdArray)
+        }
+        
+        
+        
+    }
+
 
     
+
+
+
+
+
 
     return (
         <>
@@ -57,6 +81,7 @@ export default function Dettagli() {
             <div className="container">
                 <div className="row">
 
+                    {/* //DETTAGLI DEL VIAGGIO */}
                     <div className="col-4">
                         <div className="card">
                             <div className="card-body">
@@ -64,25 +89,33 @@ export default function Dettagli() {
                                 <h3>{textIniziato}</h3>
                                 <h3>{textFinito}</h3>
                                 <h3>Partecipanti: {takePeople.length}</h3>
-
+                                <h3>Tipologia: {viaggio.tipologia}</h3>
                             </div>
                         </div>
                     </div>
+
+                    {/* //IMMAGINE */}
                     <div className="col-8">
                         <p>immagine</p>
                     </div>
+
+                    {/* //COLONNA CON L'ACCORDION DENTRO  */}
                     <div className="col-12 mt-3">
                         <div className="card">
                             <div className="card-body d-flex">
 
-                                <div class="accordion accordion-flush" id="accordionFlushExample">
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header">
-                                            <button class="accordion-button collapsed" onClick={showPeople} type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+
+
+                                {/* //ACCORDION      */}
+                                <div className="accordion accordion-flush">
+                                    <div className="accordion-item">
+                                        <h2 className="accordion-header">
+                                            <button className="accordion-button collapsed" onClick={showPeople} type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
                                                 Vedi Partecipanti
                                             </button>
                                         </h2>
-                                        <div id="flush-collapseOne" class={btn === false ? "accordion-collapse collapse" : "accordion-collapse"} data-bs-parent="#accordionFlushExample">
+                                        {/* //CONDIZIONE DELLO STATO */}
+                                        <div id="flush-collapseOne" className={btn === false ? "accordion-collapse collapse" : "accordion-collapse"} data-bs-parent="#accordionFlushExample">
                                             <div class="accordion-body bg-whithe-smoke">
                                                 <ul className="list-group">
                                                     {takePeople.map((person) => {
@@ -100,11 +133,33 @@ export default function Dettagli() {
                                 </div>
 
                             </div>
+
+                        </div>
+                    </div>
+                    <div className="col-6 mt-3">
+                        <form onSubmit={updateForm}>
+                            <div>
+                                <label className="form-label" htmlFor="ricerca">Inserisci un nome:</label>
+                                <div className="d-flex">
+                                    <input type="search" id="ricerca" className="form-control" placeholder="es: Nome" onChange={(event) => setSearch(event.target.value)} />
+                                    <button type="submit" className="btn btn-primary ms-2">INVIA</button>
+                                </div>
+                            </div>
+
+
+                        </form>
+                    </div>
+                    <div className={filter.length === 2 ? "d-none" : "col-12"}>
+                        <div className="card">
+                            <div className="card-body">
+                                <h3>{filter[0].nome}</h3>
+                                <h3>Email: {filter[0].email}</h3>
+                            </div>
                         </div>
                     </div>
                     <div className="col-12 mt-3">
                         <button className="btn btn-secondary" onClick={goBack}>Torna Indietro</button>
-                                                    
+
                     </div>
                 </div>
 
@@ -114,3 +169,4 @@ export default function Dettagli() {
         </>
     )
 }
+
