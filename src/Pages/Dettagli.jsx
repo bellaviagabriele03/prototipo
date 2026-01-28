@@ -3,6 +3,7 @@ import { viaggi } from "../assets/data";
 import { viaggiatori } from "../assets/data";
 import { use, useState } from "react";
 
+
 export default function Dettagli() {
 
 
@@ -100,7 +101,9 @@ export default function Dettagli() {
 
                     {/* //IMMAGINE */}
                     <div className="col-8">
-                        <p>immagine</p>
+                        <h2></h2>
+                        <p>IMG</p>
+                        
                     </div>
 
                     {/* //COLONNA CON L'ACCORDION DENTRO  */}

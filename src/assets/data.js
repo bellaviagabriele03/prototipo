@@ -1,7 +1,7 @@
 export const viaggiatori = [
     { id: 1, nome: "Luca", cognome: "Rossi", email: "luca.rossi@email.com", telefono: "3456789012", localita: "Roma", numeriEmergenza: "0698765432", viaggioId: 1 },
     { id: 2, nome: "Anna", cognome: "Bianchi", email: "anna.bianchi@email.com", telefono: "3491234567", localita: "Milano", viaggioId: 1 },
-    { id: 3, nome: "Marco", cognome: "Verdi", email: "marco.verdi@email.com", telefono: "3471112233", localita: "Torino", viaggio_id: 3 },
+    { id: 3, nome: "Marco", cognome: "Verdi", email: "marco.verdi@email.com", telefono: "3471112233", localita: "Torino", viaggioId: 3 },
     { id: 4, nome: "Giulia", cognome: "Neri", email: "giulia.neri@email.com", telefono: "3485566778", localita: "Napoli", numeriEmergenza: "081998877", viaggioId: 4 },
     { id: 5, nome: "Paolo", cognome: "Gialli", email: "paolo.gialli@email.com", telefono: "3467788990", localita: "Firenze", viaggioId: 2 },
     { id: 6, nome: "Francesca", cognome: "Azzurra", email: "francesca.azzurra@email.com", telefono: "3456677889", localita: "Bologna", viaggioId: 5 },
