@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 import { viaggi } from "../assets/data.js"
-import { viaggiatori } from "../assets/data.js"
+
 
 export default function Viaggi () {
 

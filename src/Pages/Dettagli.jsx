@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom"
 import { viaggi } from "../assets/data";
 import { viaggiatori } from "../assets/data";
-import { useState } from "react";
+import { use, useState } from "react";
 
 export default function Dettagli() {
 
@@ -10,7 +10,7 @@ export default function Dettagli() {
     const [viaggio, setViaggio] = useState(viaggi[id - 1]);
     const [search, setSearch] = useState("")
     const [btn, setBtn] = useState(false)
-   
+
     const navigate = useNavigate()
 
 
@@ -24,7 +24,6 @@ export default function Dettagli() {
             takePeople.push(curPerson);
         }
     }
-   
 
 
 
@@ -51,24 +50,29 @@ export default function Dettagli() {
         navigate(-1)
     }
 
+
     const [filter, setFilter] = useState(takePeople)
-    
+
+
     function updateForm(event) {
+
         event.preventDefault()
-        console.log(takePeople);
-        
-        if(search !== "") {
-            
-            const filterdArray = takePeople.filter((element)=> element.nome === search ? element : "")
+
+        if (search != "") {
+            const filterdArray = takePeople.filter((element) => element.nome === search ? element : "")
             setFilter(filterdArray)
+            console.log(filter);
         }
-        
-        
-        
+
+
+
+        console.log(search);
+
+
     }
 
 
-    
+
 
 
 
@@ -137,6 +141,7 @@ export default function Dettagli() {
                         </div>
                     </div>
                     <div className="col-6 mt-3">
+
                         <form onSubmit={updateForm}>
                             <div>
                                 <label className="form-label" htmlFor="ricerca">Inserisci un nome:</label>
@@ -153,7 +158,8 @@ export default function Dettagli() {
                         <div className="card">
                             <div className="card-body">
                                 <h3>{filter[0].nome}</h3>
-                                <h3>Email: {filter[0].email}</h3>
+                                <h3>{filter[0].email}</h3>
+                                <h3>{filter[0].telefono}</h3>
                             </div>
                         </div>
                     </div>
